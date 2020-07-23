@@ -1,0 +1,24 @@
+<div class="main-container">
+    <input type="text" class="text" [formControl]="name" placeholder="Search for Pokémon">
+    <div class="grid-container">
+        <div class="grid-item" (mouseover)="mouseOver(pokemon.id)" (mouseout)="mouseOut()"
+            *ngFor="let pokemon of pokemons">
+            <p class="grid-item-name">{{ pokemon.name }}</p>
+            <img class="grid-item-img" src='{{pokemon.sprites.front_default}}'>
+            <p class="grid-item-number"># {{ pokemon.id }}</p>
+            <div class="types-container tooltip" id={{pokemon.id}}>
+                <div class="type-container tooltip-item" *ngFor="let type of pokemon.types">
+                    type:
+                    <div class="type-box" [ngClass]=type.type.name>{{ type.type.name }}
+                    </div>
+                </div>
+                <div>
+                    Height: {{ pokemon.height }}
+                </div>
+                <div>
+                    Weight: {{ pokemon.weight }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

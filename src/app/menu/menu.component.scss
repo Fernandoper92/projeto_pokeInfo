@@ -1,0 +1,38 @@
+#main {
+    background-color: rgb(228, 228, 228);
+    width: 65em;
+    margin: auto;
+    height: 1fr;
+}
+
+#main-menu .flex-container {
+    display: flex;
+    align-items: baseline;
+    background-color: #ff4e4e;
+}
+
+.flex-box {
+    margin: 5px;
+    text-align: center;
+}
+
+#title {
+    font-size: 48px;
+    color: white;
+    margin-right: 10px;
+}
+
+.flex-box a {
+    text-decoration: none;
+    font-size: 24px;
+    color: white;
+}
+
+.flex-box a:hover {
+    color: rgb(218, 218, 218);
+}
+
+#sobre {
+    border-left: 1px solid white;
+    padding-left: 10px;
+}

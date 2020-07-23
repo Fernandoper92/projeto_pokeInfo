@@ -1,0 +1,122 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  color: gray;
+  background-color: rgb(228, 228, 228);
+  font-size: 16px;
+  width: 5%;
+  height: 30px;
+  margin: auto;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid gray;
+  transition-duration: 0.5s;
+  position: relative;
+}
+
+.text:focus,
+.text:hover {
+  width: 15%;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-auto-rows: 170px;
+  gap: 20px;
+  height: auto;
+  align-content: space-around;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.grid-item {
+  width: 150px;
+  height: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.grid-item:hover {
+  background:rgb(248, 248, 248);
+  .tooltip {
+    opacity: 0.9;
+    visibility: visible;
+  }
+}
+
+.grid-item-name {
+  width: 100%;
+  height: auto;
+  margin-top: 3px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.grid-item-img {
+  width: auto;
+  height: auto;
+  background: linear-gradient(180deg, #ff4e4e 48%, black 48% 52%, #bdb9b8 52%);
+  border-radius: 50%;
+}
+
+.tooltip {
+  width: 150px;
+  height: auto;
+  padding: 2px 1px;
+  border: 1px solid;
+  border-radius: 5px;
+  position: fixed;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  background: rgb(255, 251, 251);
+}
+
+
+
+// troca a cor do background dos types de acordo com o nome de cada type
+.type-box {
+  width: 70px;
+  display: inline-block;
+  margin: 1px;
+  margin-bottom: 1px;
+  color: white;
+  background-color: gray;
+  border-radius: 5px;
+}
+.grass {
+  background-color: rgba(0, 128, 0, 0.8);
+}
+
+.poison {
+  background-color: rgba(128, 0, 128, 0.8);
+}
+
+.fire {
+  background-color: rgba(255, 68, 0, 0.8);
+}
+
+.flying {
+  background: linear-gradient(180deg, #3dc7ef 50%, #bdb9b8 50%);
+}
+
+.water {
+  background-color: #4592c4;
+}
+
+.bug {
+  background-color: #729f3f;
+}

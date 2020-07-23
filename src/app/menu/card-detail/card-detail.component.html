@@ -1,0 +1,29 @@
+<div class="main-container">
+    <div class="container-menu">
+        <button type="button" id="button-previous" (click)="goPrevious()">ANT</button>
+        <button type="button" id="button-next" (click)="goNext()">PROX</button>
+    </div>
+    <button (click)="back()">VOLTAR</button>
+    <div class="container-card">
+        <h1>{{ pokemon.name }}</h1>
+        <img src='{{pokemon.sprites.front_default}}'>
+        <div class="grid-item-content" *ngFor="let type of pokemon.types">
+            <div class="type-box" [ngClass]=type.type.name>{{ type.type.name }}</div>
+        </div>
+    </div>
+    <h2 class="evo-title">Evoluções</h2>
+    <div class="evo-main">
+        <div class="evo-container" *ngFor="let pokemon of evoChain">
+            <div class="evo-box container-card" *ngIf="pokemon">
+                <h3>{{ pokemon.name }}</h3>
+                <img src='{{pokemon.sprites.front_default}}'>
+                <div class="grid-item-content" *ngFor="let type of pokemon.types">
+                    <div class="type-box" [ngClass]=type.type.name>{{ type.type.name }}</div>
+                </div>
+            </div>
+            <div class="arrow-container" *ngIf="pokemon">
+                <div class="arrow"></div>
+            </div>
+        </div>
+    </div>
+</div>
