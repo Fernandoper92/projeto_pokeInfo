@@ -1,0 +1,27 @@
+<div class="main-container">
+    <div class="grid-container">
+        <div class="grid-item" id="{{ pokemon.name }}"
+            *ngFor="let pokemon of pokemons">
+            <img class="grid-item-img" src="https://pokeres.bastionbot.org/images/pokemon/{{ pokemon.id }}.png">
+            <p class="grid-item-name">{{ pokemon.name }}</p>
+            <div class="grid-item-container">
+                <p class="grid-item-number">#{{ pokemon.id }}</p>
+            </div>
+            <div class="types-container tooltip" id={{pokemon.id}}>
+                <div class="type-container tooltip-item" *ngFor="let type of pokemon.types">
+                    Tipo:
+                    <div class="type-box {{ type.type.name }}">{{ type.type.name }}
+                    </div>
+                </div>
+                <div>
+                    Altura: {{ pokemon.height }} m
+                </div>
+                <div>
+                    Peso: {{ pokemon.weight }} kg
+                </div>
+            </div>
+            <button class="close" (click)="removeFavorite(pokemon.name)">x</button>
+        </div>
+    </div>
+    <div class="alert" *ngIf="!pokemons.length">Nenhum pokémon salvo como favorito!</div>
+</div>

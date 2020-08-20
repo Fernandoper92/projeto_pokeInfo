@@ -5,7 +5,7 @@
     height: 1fr;
 }
 
-#main-menu .flex-container {
+#main-menu #flex-container {
     display: flex;
     align-items: baseline;
     background-color: #ff4e4e;
@@ -33,6 +33,11 @@
 }
 
 #sobre {
+    border-left: 1px solid white;
+    padding-left: 10px;
+}
+
+#favoritos {
     border-left: 1px solid white;
     padding-left: 10px;
 }

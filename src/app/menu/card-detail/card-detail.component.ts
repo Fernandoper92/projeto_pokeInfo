@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { PokemonAPIService, Pokemon, Evolution } from 'src/app/shared';
+import { Evolution } from 'src/app/shared/evolution.model';
+import { Pokemon } from 'src/app/shared/pokemon.model';
+import { PokemonAPIService } from 'src/app/shared/pokemon-api.service';
+import { Specie } from 'src/app/shared/specie.model';
 
 @Component({
   selector: 'app-card-detail',
@@ -10,103 +13,110 @@ import { PokemonAPIService, Pokemon, Evolution } from 'src/app/shared';
 })
 export class CardDetailComponent implements OnInit {
 
-  public pokemonId: number;
   public pokemon: Pokemon;
-  public evoChain: Pokemon[] = [];
+  public specie: Specie;
+  public description: string;
   public evolution: Evolution;
+  public evoChain: Pokemon[] = [];
 
 
   constructor(private route: ActivatedRoute, private router: Router, private pService: PokemonAPIService) {
   }
 
   ngOnInit(): void {
-
-    this.getId();
-    this.getPokemon(this.pokemonId);
-    this.getEvo(this.pokemon.name);
-    this.getEvoChain(this.evolution);
-    this.changeButton(this.pokemonId);
   }
 
-  getId() {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      const id = parseInt(params.get('id'));
-      this.pokemonId = id;
+  log(){
+    console.log('works')
+  }
+
+  getPokemon() {
+    const pokemon = localStorage['pokemon']
+    this.pokemon = pokemon ? JSON.parse(pokemon) : '';
+  }
+
+  getPokemonByName(name) {
+    console.log(name)
+    this.pService.getPokemon(name, null).subscribe((response: Pokemon) => {
+      response.name = this.capitalizeFirstLetter(response.name);
+      this.evoChain.push(response);
+      this.evoChain.sort((a, b) => a.order - b.order);
     });
   }
 
-  getPokemon(pokemonId: number) {
-    this.pokemon = this.pService.pokemons[pokemonId - 1];
-  }
-
-  getEvo(pokemonName) {
-    this.pService.getEvolution(pokemonName);
-    this.evolution = this.pService.evoChain;
-  }
-
-  getEvoChain(evolution: Evolution) {
-
-    let firstEvo = evolution.chain.species.name
-    let secondEvo = evolution.chain.evolves_to[0].species.name
-
-    this.pService.getPokemonByName(firstEvo).subscribe((response: Pokemon) => {
-      this.evoChain[0] = response;
+  getSpecie() {
+    const pokemon = this.pokemon;
+    this.pService.getUrl(pokemon.species.url).subscribe((response: Specie) => {
+      this.specie = response;
+      this.getDescription();
+      this.getEvolution();
     });
-    this.pService.getPokemonByName(secondEvo).subscribe((response: Pokemon) => {
-      this.evoChain[1] = response;
-    });
-    if (this.evolution.chain.evolves_to[0].evolves_to[0]) {
+  }
 
-      let thirdEvo = evolution.chain.evolves_to[0].evolves_to[0].species.name
+  getDescription() {
+    let description;
+    description = this.specie.flavor_text_entries[0].flavor_text;
+    this.description = description;
+  }
 
-      this.pService.getPokemonByName(thirdEvo).subscribe((response: Pokemon) => {
-        this.evoChain[2] = response;
-      });
+  getEvolution() {
+    const specie = this.specie;
+    this.pService.getUrl(specie.evolution_chain.url).subscribe((response: Evolution) => {
+      this.evolution = response;
+      this.getChain();
+    })
+  }
+
+  getChain() {
+    let evolution: Evolution = this.evolution;
+    let evoName: string[] = [];
+    let evolvesTo: [{}] = evolution.chain.evolves_to;
+
+    function pushName(element) {
+      evoName.push(element.species.name);
+    };
+
+    let name1 = evolution.chain;
+    name1 ? pushName(name1) : null;
+
+    if (evolvesTo.length > 1) {
+      evolvesTo.forEach(pushName);
+
     } else {
-      this.evoChain[2] = null;
+
+      let name2 = evolution.chain.evolves_to[0];
+      let name3 = evolution.chain.evolves_to[0]?.evolves_to[0];
+
+      name2 ? pushName(name2) : null;
+      name3 ? pushName(name3) : null;
+
+    }
+
+    evoName.forEach((obj => {
+      this.getPokemonByName(obj)
+    }));
+  }
+
+  closeCardDetailComponent(event) {
+    const eventElement = event.toElement;
+    const overlayElement = document.getElementById('overlay');
+    const buttonElement = document.getElementById('close-button');
+    const overlayComponent = document.getElementById('show-overlay')
+
+    if (eventElement === overlayElement || eventElement === buttonElement) {
+      overlayComponent.style.display = "none"
     }
   }
 
-  goPrevious() {
-    let previousId = this.pokemonId - 1;
-    this.getPokemon(previousId);
-    this.getEvo(this.pokemon.name);
-    this.getEvoChain(this.evolution);
-    this.router.navigate(['menu/cards', previousId]);
-    this.changeButton(previousId);
+  openCardDetailComponent() {
+    this.getPokemon();
+    let component = document.getElementById('show-overlay');
+    this.evoChain = [];
+    this.getSpecie();
+    component.style.display = "block";
   }
 
-  goNext() {
-    let nextId = this.pokemonId + 1;
-    this.getPokemon(nextId);
-    this.getEvo(this.pokemon.name);
-    this.getEvoChain(this.evolution);
-    this.router.navigate(['menu/cards', nextId]);
-    this.changeButton(nextId);
-  }
-
-  changeButton(n) {
-    if (n === 1) {
-      let button = document.getElementById('button-previous')
-      button.classList.add("disabled");
-      button.setAttribute('disabled', 'disabled');
-    } else {
-      let button = document.getElementById('button-previous')
-      button.classList.remove("disabled");
-      button.removeAttribute('disabled');
-    }
-    if (n === this.pService.pokemons.length) {
-      let button = document.getElementById('button-next')
-      button.classList.add("disabled");
-      button.setAttribute('disabled', 'disabled');
-    } else {
-      let button = document.getElementById('button-next')
-      button.classList.remove("disabled");
-      button.removeAttribute('disabled');
-    }
-  }
-
-  back() {
-    this.router.navigate(['menu/cards']);
+  capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 }

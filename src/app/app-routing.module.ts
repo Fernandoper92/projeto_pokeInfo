@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'; // CLI imports router
-import { SobreComponent, CardsComponent, CardDetailComponent } from './menu';
+import { SobreComponent } from './menu/sobre/sobre.component';
+import { CardsComponent } from './menu/cards/cards.component';
+import { FavoritesComponent } from './menu/favorites/favorites.component';
 
 export const routes: Routes = [
-    { path: '' , redirectTo: 'menu/cards' , pathMatch: 'full' },
-    { path: 'menu/sobre', component: SobreComponent },
-    { path: 'menu/cards', component: CardsComponent },
-    { path: 'menu/cards/:id', component: CardDetailComponent}
-]; // sets up routes constant where you define your routes
+    { path: '' , redirectTo: 'inicio' , pathMatch: 'full' },
+    { path: 'inicio/favoritos', component: FavoritesComponent },
+    { path: 'inicio/sobre', component: SobreComponent },
+    { path: 'inicio', component: CardsComponent },
+];
 
 // configures NgModule imports and exports
 @NgModule({

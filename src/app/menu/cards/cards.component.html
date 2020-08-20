@@ -1,24 +1,45 @@
 <div class="main-container">
-    <input type="text" class="text" [formControl]="name" placeholder="Search for Pokémon">
+    <div class="filter">
+        <label class="text" for="input">Busca por nome:</label>
+        <input type="text" class="input text" name="input" [(ngModel)]="filtro" placeholder="Digite um nome">
+        <label style="margin-left: 20px" class="text" for="geracoes">Filtro por geração:</label>
+        <select class="select text" name="geracoes" [formControl]="geracao">
+            <option value="" selected>Todas as gerações</option>
+            <option *ngFor="let item of items" [value]="item.id">
+                <p *ngIf="item.geracao">{{ item.geracao }}</p>
+                <p *ngIf="item.regiao"> - {{ item.regiao }}</p>
+            </option>
+        </select>
+    </div>
     <div class="grid-container">
         <div class="grid-item" (mouseover)="mouseOver(pokemon.id)" (mouseout)="mouseOut()"
-            *ngFor="let pokemon of pokemons">
+            *ngFor="let pokemon of filterPokemon()">
             <p class="grid-item-name">{{ pokemon.name }}</p>
-            <img class="grid-item-img" src='{{pokemon.sprites.front_default}}'>
-            <p class="grid-item-number"># {{ pokemon.id }}</p>
+            <img class="grid-item-img" src="https://pokeres.bastionbot.org/images/pokemon/{{ pokemon.id }}.png"
+                (click)="openCardDetailComponent(pokemon)">
+            <div class="grid-item-container">
+                <p class="grid-item-number">Nº{{ pokemon.id }}</p>
+                <span id="fav{{ pokemon.name }}" class="favorite fas fa-star"
+                    [class.not-favorite]="!isFavorite(pokemon.name)" [class.is-favorite]="isFavorite(pokemon.name)"
+                    (click)="onFavoriteClick(pokemon)" (mouseover)="mouseOut()">
+                </span>
+            </div>
             <div class="types-container tooltip" id={{pokemon.id}}>
-                <div class="type-container tooltip-item" *ngFor="let type of pokemon.types">
-                    type:
-                    <div class="type-box" [ngClass]=type.type.name>{{ type.type.name }}
+                <div class="flex-start type-container tooltip-item" *ngFor="let type of pokemon.types">
+                    Tipo:
+                    <div class="type-box {{ type.type.name }}">{{ type.type.name }}
                     </div>
                 </div>
-                <div>
-                    Height: {{ pokemon.height }}
+                <div class="flex-start type-height">
+                    Altura: {{ pokemon.height }} m
                 </div>
-                <div>
-                    Weight: {{ pokemon.weight }}
+                <div class="flex-start type-weight">
+                    Peso: {{ pokemon.weight }} kg
                 </div>
             </div>
+
         </div>
     </div>
+    <app-card-detail #pokemonDetail></app-card-detail>
+    <div class="alert" *ngIf="!filterPokemon().length">Nenhum pokémon encontrado!</div>
 </div>

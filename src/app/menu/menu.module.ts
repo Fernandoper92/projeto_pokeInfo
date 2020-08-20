@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { CardsComponent } from './cards';
-import { SobreComponent } from './sobre';
+import { CardsComponent } from './cards/cards.component';
+import { SobreComponent } from './sobre/sobre.component';
 import { MenuComponent } from './menu.component';
-import { PokemonAPIService } from '../shared';
 import { CardDetailComponent } from './card-detail/card-detail.component';
+import { PokemonAPIService } from '../shared/pokemon-api.service';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 
 
@@ -17,7 +18,8 @@ import { CardDetailComponent } from './card-detail/card-detail.component';
     MenuComponent,
     SobreComponent,
     CardsComponent,
-    CardDetailComponent
+    CardDetailComponent,
+    FavoritesComponent
   ],
   imports: [
     CommonModule,

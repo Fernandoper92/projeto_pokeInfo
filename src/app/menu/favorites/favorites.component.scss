@@ -1,0 +1,107 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill);
+    grid-auto-rows: auto;
+    gap: 10px;
+    height: auto;
+    align-content: space-around;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.grid-item {
+    width: auto;
+    height: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.grid-item:hover {
+    background: rgb(248, 248, 248);
+}
+
+.grid-item-name {
+    font-size: 16px;
+    height: auto;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.grid-item-img {
+    margin: 5px;
+    width: 100px;
+    height: 100px;
+}
+
+.grid-item-container {
+}
+
+.grid-item-number {
+    font-weight: bold;
+}
+
+.close {
+    cursor: pointer;
+    position: relative;
+    bottom: 30%;
+    left: 6%;
+    font-size: 16px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+  }
+
+  .close:hover {
+    opacity: 1;
+  }
+
+.alert {
+    color: red;
+    text-align: center;
+    margin: 10px;
+}
+
+// troca a cor do background dos types de acordo com o nome de cada type
+.type-box {
+    width: 70px;
+    display: inline-block;
+    margin: 1px;
+    margin-bottom: 1px;
+    color: white;
+    background-color: gray;
+    border-radius: 5px;
+}
+
+.grass {
+    background-color: rgba(0, 128, 0, 0.8);
+}
+
+.poison {
+    background-color: rgba(128, 0, 128, 0.8);
+}
+
+.fire {
+    background-color: rgba(255, 68, 0, 0.8);
+}
+
+.flying {
+    background: linear-gradient(180deg, #3dc7ef 50%, #bdb9b8 50%);
+}
+
+.water {
+    background-color: #4592c4;
+}
+
+.bug {
+    background-color: #729f3f;
+}

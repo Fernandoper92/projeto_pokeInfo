@@ -1,29 +1,51 @@
-<div class="main-container">
-    <div class="container-menu">
-        <button type="button" id="button-previous" (click)="goPrevious()">ANT</button>
-        <button type="button" id="button-next" (click)="goNext()">PROX</button>
-    </div>
-    <button (click)="back()">VOLTAR</button>
-    <div class="container-card">
-        <h1>{{ pokemon.name }}</h1>
-        <img src='{{pokemon.sprites.front_default}}'>
-        <div class="grid-item-content" *ngFor="let type of pokemon.types">
-            <div class="type-box" [ngClass]=type.type.name>{{ type.type.name }}</div>
-        </div>
-    </div>
-    <h2 class="evo-title">Evoluções</h2>
-    <div class="evo-main">
-        <div class="evo-container" *ngFor="let pokemon of evoChain">
-            <div class="evo-box container-card" *ngIf="pokemon">
-                <h3>{{ pokemon.name }}</h3>
-                <img src='{{pokemon.sprites.front_default}}'>
-                <div class="grid-item-content" *ngFor="let type of pokemon.types">
-                    <div class="type-box" [ngClass]=type.type.name>{{ type.type.name }}</div>
+<div id="show-overlay">
+    <div class="overlay-container" id="overlay" (click)="closeCardDetailComponent($event)">
+        <div class="main-container" *ngIf="pokemon">
+            <a class="close" id="close-button" (click)="closeCardDetailComponent($event)"></a>
+            <section class="flex-item">
+                <img class="flex-item-img" src="https://pokeres.bastionbot.org/images/pokemon/{{ pokemon.id }}.png">
+                <div class="flex-item-data">
+                    <p class="flex-item-name">{{ pokemon.name }} | Nº{{ pokemon.id }}</p>
+                    <div class="type-container" *ngFor="let type of pokemon.types">
+                        Tipo:
+                        <div class="type-box {{ type.type.name }}">{{ type.type.name }}
+                        </div>
+                    </div>
+                    <div class="type-height">
+                        Altura: {{ pokemon.height }} m
+                    </div>
+                    <div class="type-weight">
+                        Peso: {{ pokemon.weight }} kg
+                    </div>
                 </div>
-            </div>
-            <div class="arrow-container" *ngIf="pokemon">
-                <div class="arrow"></div>
-            </div>
+            </section>
+            <section class="flex-evo-title">
+                <p>Evoluções</p>
+            </section>
+            <section class="flex-evo">
+                <div class="flex-evo-item" *ngFor="let evolucao of evoChain">
+                    <img class="flex-evo-img" src="https://pokeres.bastionbot.org/images/pokemon/{{ evolucao.id }}.png">
+                    <div class="flex-evo-box">
+                        <p class="flex-evo-name">{{ evolucao.name }}</p>
+                        <p>Nº{{ evolucao.id }}</p>
+                        <div class="type-container-evo" *ngFor="let type of evolucao.types">
+                            <div class="type-box-evo {{ type.type.name }}">{{ type.type.name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arrow-right"></div>
+                </div>
+            </section>
+            <section class="about">
+                <div id="description">
+                    <h3>Descrição</h3>
+                    <p>{{ description }}</p>
+                </div>
+                <div id="obs">
+                    <h4>OBSSERVAÇÃO</h4>
+                    <p>Infelizmente só consegui a descrição em inglês.</p>
+                </div>
+            </section>
         </div>
     </div>
 </div>

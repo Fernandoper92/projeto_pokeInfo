@@ -1,4 +1,3 @@
-import { PokemonAPIService, Pokemon } from './../shared';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  pokemons: Pokemon;
+  aba: string = "";
 
   constructor() {
   }

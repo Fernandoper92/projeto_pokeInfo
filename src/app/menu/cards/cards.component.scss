@@ -1,25 +1,23 @@
 .main-container {
+  width: 65em;
   display: flex;
   flex-direction: column;
 }
 
 .text {
-  color: gray;
-  background-color: rgb(228, 228, 228);
-  font-size: 16px;
-  width: 5%;
+  font-size: 20px;
   height: 30px;
-  margin: auto;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid gray;
-  transition-duration: 0.5s;
-  position: relative;
+}
+.filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  padding: 5px;
 }
 
-.text:focus,
-.text:hover {
-  width: 15%;
+.input {
+  outline: none;
 }
 
 .grid-container {
@@ -31,6 +29,7 @@
   align-content: space-around;
   box-sizing: border-box;
   padding: 10px;
+  overflow: visible;
 }
 
 .grid-item {
@@ -41,13 +40,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  cursor: pointer;
   background-color: white;
   border-radius: 5px;
 }
 
 .grid-item:hover {
-  background:rgb(248, 248, 248);
+  background: rgb(248, 248, 248);
   .tooltip {
     opacity: 0.9;
     visibility: visible;
@@ -55,25 +53,46 @@
 }
 
 .grid-item-name {
-  width: 100%;
-  height: auto;
-  margin-top: 3px;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  color: rgb(0, 0, 0);
-  text-decoration: none;
   font-size: 16px;
+  height: auto;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .grid-item-img {
-  width: auto;
-  height: auto;
-  background: linear-gradient(180deg, #ff4e4e 48%, black 48% 52%, #bdb9b8 52%);
-  border-radius: 50%;
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+}
+
+.grid-item-container {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.favorite {
+  pointer-events: auto;
+  cursor: pointer;
+  font-size: 20px;
+  display: inline-block;
+}
+
+.favorite:hover {
+  -webkit-text-stroke: 1px black;
+}
+
+.not-favorite {
+  color: gray;
+}
+
+.is-favorite {
+  color: gold;
 }
 
 .tooltip {
-  width: 150px;
+  width: auto;
   height: auto;
   padding: 2px 1px;
   border: 1px solid;
@@ -85,7 +104,17 @@
   background: rgb(255, 251, 251);
 }
 
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+  margin: 4px 8px;
+}
 
+.alert {
+  color: red;
+  text-align: center;
+  margin: 10px;
+}
 
 // troca a cor do background dos types de acordo com o nome de cada type
 .type-box {
@@ -97,6 +126,7 @@
   background-color: gray;
   border-radius: 5px;
 }
+
 .grass {
   background-color: rgba(0, 128, 0, 0.8);
 }
