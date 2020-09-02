@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Evolution } from 'src/app/shared/evolution.model';
@@ -17,36 +17,30 @@ export class CardDetailComponent implements OnInit {
   public specie: Specie;
   public description: string;
   public evolution: Evolution;
-  public evoChain: Pokemon[] = [];
+  public evolutionChain: Pokemon[] = [];
+  public colors: {};
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private pService: PokemonAPIService) {
+  constructor(private route: ActivatedRoute, private router: Router, private pokemonService: PokemonAPIService) {
   }
 
   ngOnInit(): void {
+    this.colors = this.pokemonService.colors;
   }
-
-  log(){
-    console.log('works')
-  }
-
-  getPokemon() {
-    const pokemon = localStorage['pokemon']
-    this.pokemon = pokemon ? JSON.parse(pokemon) : '';
-  }
-
+ 
   getPokemonByName(name) {
-    console.log(name)
-    this.pService.getPokemon(name, null).subscribe((response: Pokemon) => {
-      response.name = this.capitalizeFirstLetter(response.name);
-      this.evoChain.push(response);
-      this.evoChain.sort((a, b) => a.order - b.order);
-    });
+    let pokemon: Pokemon;
+    this.pokemonService.getPokemonByName(name).subscribe(
+      response => {
+        pokemon = response;
+        this.evolutionChain.push(pokemon);
+        this.evolutionChain.sort((a, b) => a.order - b.order);
+      });
   }
 
   getSpecie() {
     const pokemon = this.pokemon;
-    this.pService.getUrl(pokemon.species.url).subscribe((response: Specie) => {
+    this.pokemonService.getUrl(pokemon.species.url).subscribe((response: Specie) => {
       this.specie = response;
       this.getDescription();
       this.getEvolution();
@@ -61,13 +55,13 @@ export class CardDetailComponent implements OnInit {
 
   getEvolution() {
     const specie = this.specie;
-    this.pService.getUrl(specie.evolution_chain.url).subscribe((response: Evolution) => {
+    this.pokemonService.getUrl(specie.evolution_chain.url).subscribe((response: Evolution) => {
       this.evolution = response;
-      this.getChain();
+      this.getEvolutionChain();
     })
   }
 
-  getChain() {
+  getEvolutionChain() {
     let evolution: Evolution = this.evolution;
     let evoName: string[] = [];
     let evolvesTo: [{}] = evolution.chain.evolves_to;
@@ -92,28 +86,26 @@ export class CardDetailComponent implements OnInit {
 
     }
 
-    evoName.forEach((obj => {
-      this.getPokemonByName(obj)
+    evoName.forEach((name => {
+      this.getPokemonByName(name)
     }));
+  }
+
+  openCardDetailComponent(pokemon) {
+    this.pokemon = pokemon;
+    let component = document.getElementById('show-modal');
+    this.evolutionChain = [];
+    this.getSpecie();
+    component.classList.add('showModal');
   }
 
   closeCardDetailComponent(event) {
     const eventElement = event.toElement;
-    const overlayElement = document.getElementById('overlay');
-    const buttonElement = document.getElementById('close-button');
-    const overlayComponent = document.getElementById('show-overlay')
-
-    if (eventElement === overlayElement || eventElement === buttonElement) {
-      overlayComponent.style.display = "none"
+    const showModal = document.getElementById('show-modal');
+    
+    if (eventElement.classList.contains("close-modal")) {
+      showModal.classList.remove('showModal');
     }
-  }
-
-  openCardDetailComponent() {
-    this.getPokemon();
-    let component = document.getElementById('show-overlay');
-    this.evoChain = [];
-    this.getSpecie();
-    component.style.display = "block";
   }
 
   capitalizeFirstLetter(string: string) {

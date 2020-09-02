@@ -5,10 +5,11 @@ import { CardsComponent } from './menu/cards/cards.component';
 import { FavoritesComponent } from './menu/favorites/favorites.component';
 
 export const routes: Routes = [
-    { path: '' , redirectTo: 'inicio' , pathMatch: 'full' },
-    { path: 'inicio/favoritos', component: FavoritesComponent },
-    { path: 'inicio/sobre', component: SobreComponent },
-    { path: 'inicio', component: CardsComponent },
+    { path: '' , redirectTo: 'pokemons', pathMatch: 'full' },
+    { path: 'favoritos', component: FavoritesComponent },
+    { path: 'sobre', component: SobreComponent },
+    { path: 'pokemons', component: CardsComponent },
+    { path: '**', redirectTo: 'pokemons', pathMatch: 'full' }
 ];
 
 // configures NgModule imports and exports

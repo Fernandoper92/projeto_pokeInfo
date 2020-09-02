@@ -1,107 +1,78 @@
-.main-container {
+.flex-container-main {
+    padding: 20px;
     display: flex;
     flex-direction: column;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill);
-    grid-auto-rows: auto;
-    gap: 10px;
-    height: auto;
-    align-content: space-around;
-    box-sizing: border-box;
-    padding: 10px;
+.flex-container-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.grid-item {
-    width: auto;
-    height: auto;
+.flex-container-item {
+    margin: 5px 10px;
+    width: 700px;
     text-align: center;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: white;
     border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+        box-shadow: 0 0px 10px rgba(0, 0, 0, 0.6);
+        cursor: pointer;
+    }
+
+    .container-img {
+        padding: 10px;
+        width: 100px;
+        height: 100px;
+    }
+
+    .container-name-id {
+        width: 100px;
+    }
+
+    .flex-container-types {
+        width: 100px;
+
+        .container-type {
+            width: 70px;
+            display: inline-block;
+            margin: 1px;
+            margin-bottom: 1px;
+            color: white;
+            background-color: gray;
+            border-radius: 5px;
+        }
+    }
+
+    .flex-container-info {
+        width: 100px;
+    }
+
+    .close {
+        height: 100px;
+        margin: 5px 10px;
+        cursor: pointer;
+        font-size: 50px;
+        opacity: 0.3;
+        align-self: flex-start;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
 }
-
-.grid-item:hover {
-    background: rgb(248, 248, 248);
-}
-
-.grid-item-name {
-    font-size: 16px;
-    height: auto;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.grid-item-img {
-    margin: 5px;
-    width: 100px;
-    height: 100px;
-}
-
-.grid-item-container {
-}
-
-.grid-item-number {
-    font-weight: bold;
-}
-
-.close {
-    cursor: pointer;
-    position: relative;
-    bottom: 30%;
-    left: 6%;
-    font-size: 16px;
-    width: 32px;
-    height: 32px;
-    opacity: 0.3;
-  }
-
-  .close:hover {
-    opacity: 1;
-  }
-
 .alert {
-    color: red;
+    padding: 20px;
+    font-size: 20px;
+    color: #D8000C;
+    background-color: #FFD2D2;
     text-align: center;
-    margin: 10px;
-}
-
-// troca a cor do background dos types de acordo com o nome de cada type
-.type-box {
-    width: 70px;
-    display: inline-block;
-    margin: 1px;
-    margin-bottom: 1px;
-    color: white;
-    background-color: gray;
-    border-radius: 5px;
-}
-
-.grass {
-    background-color: rgba(0, 128, 0, 0.8);
-}
-
-.poison {
-    background-color: rgba(128, 0, 128, 0.8);
-}
-
-.fire {
-    background-color: rgba(255, 68, 0, 0.8);
-}
-
-.flying {
-    background: linear-gradient(180deg, #3dc7ef 50%, #bdb9b8 50%);
-}
-
-.water {
-    background-color: #4592c4;
-}
-
-.bug {
-    background-color: #729f3f;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }

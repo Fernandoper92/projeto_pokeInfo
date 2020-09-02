@@ -1,43 +1,55 @@
 #main {
-    background-color: rgb(228, 228, 228);
+    background-color: rgb(243, 243, 243);
     width: 65em;
     margin: auto;
-    height: 1fr;
+    padding-top: 65.2px;
+
+    #main-menu {
+        display: flex;
+        width: 65em;
+        height: 65.2px;
+        position: fixed;
+        top: 0;
+        box-shadow: 0 0 5px black;
+        background-color: #ff4e4e;
+        z-index: 1000;
+    }
 }
 
-#main-menu #flex-container {
+#flex-container {
+    width: 100%;
     display: flex;
-    align-items: baseline;
-    background-color: #ff4e4e;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .flex-box {
-    margin: 5px;
+    height: 65.2px;
+    padding: 5px;
+    display: flex;
     text-align: center;
+
+    #title {
+        text-decoration: none;  
+        color: white;
+        font-size: 48px;
+        font-weight: bolder;
+        align-self: center;
+    }
+
+    a {
+        text-decoration: none;
+        font-size: 30px;
+        padding: 0 10px;
+        color: white;
+        align-self: center;
+    }
+
+    &.router:hover {
+        background-color: #ff6b6b;
+    }
 }
 
-#title {
-    font-size: 48px;
-    color: white;
-    margin-right: 10px;
-}
-
-.flex-box a {
-    text-decoration: none;
-    font-size: 24px;
-    color: white;
-}
-
-.flex-box a:hover {
-    color: rgb(218, 218, 218);
-}
-
-#sobre {
-    border-left: 1px solid white;
-    padding-left: 10px;
-}
-
-#favoritos {
-    border-left: 1px solid white;
-    padding-left: 10px;
+.active {
+    background-color: #ff2020b3;
 }

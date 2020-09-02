@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AlertBoxComponent } from '../alert-box/alert-box.component';
 
 @Component({
   selector: 'app-menu',
@@ -8,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class MenuComponent implements OnInit {
 
   aba: string = "";
+  @ViewChild('alertBox', { static: true }) alertBox: AlertBoxComponent;
 
   constructor() {
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.alertBox.showAlertBox();
+  }
   
 }

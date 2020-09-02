@@ -1,8 +1,49 @@
-div {
-    width: 60em;
-    margin: auto;
-    height: 1fr;
+p, h1 {
+    cursor: default;
+    margin: 5px;
 }
-h5 {
-    background-color: red;
+
+a {
+    text-decoration: none;
+    margin: 5px;
+    color: rgb(0, 0, 255);
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.container {
+    margin: 10px;
+    padding: 10px;
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.box-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    font-size: 24px;
+}
+
+#autor {
+    display: flex;
+    flex-direction: column;
 }

@@ -1,27 +1,29 @@
-<div class="main-container">
-    <div class="grid-container">
-        <div class="grid-item" id="{{ pokemon.name }}"
-            *ngFor="let pokemon of pokemons">
-            <img class="grid-item-img" src="https://pokeres.bastionbot.org/images/pokemon/{{ pokemon.id }}.png">
-            <p class="grid-item-name">{{ pokemon.name }}</p>
-            <div class="grid-item-container">
-                <p class="grid-item-number">#{{ pokemon.id }}</p>
+<div class="flex-container-main">
+    <div class="flex-container-items" *ngIf="pokemons">
+        <div class="flex-container-item" id="{{ pokemon?.name }}" *ngFor="let pokemon of pokemons"
+            (click)="openCardDetailComponent(pokemon)">
+            <img class="container-img" src="https://pokeres.bastionbot.org/images/pokemon/{{ pokemon?.id }}.png">
+            <div class="container-name-id">
+                <p>{{ pokemon.name| camelCase }}<br>{{ pokemon.id | number:'3.0' }} </p>
             </div>
-            <div class="types-container tooltip" id={{pokemon.id}}>
-                <div class="type-container tooltip-item" *ngFor="let type of pokemon.types">
-                    Tipo:
-                    <div class="type-box {{ type.type.name }}">{{ type.type.name }}
+            <div class="flex-container-types">
+                Tipo:
+                <div class="container-types" *ngFor="let type of pokemon?.types">
+                    <div class="container-type" [style.backgroundColor]="colors[type.type.name]">{{ type.type.name }}
                     </div>
                 </div>
-                <div>
-                    Altura: {{ pokemon.height }} m
+            </div>
+            <div class="flex-container-info">
+                <div class="container-height">
+                    <p>Altura: {{ pokemon.height }} m</p>
                 </div>
-                <div>
-                    Peso: {{ pokemon.weight }} kg
+                <div class="container-weight">
+                    <p>Peso: {{ pokemon.weight }} kg</p>
                 </div>
             </div>
-            <button class="close" (click)="removeFavorite(pokemon.name)">x</button>
+            <span class="close fas fa-times" id="close-button" (click)="removeFavorite(pokemon.id)"></span>
         </div>
     </div>
+    <app-card-detail #pokemonDetail></app-card-detail>
     <div class="alert" *ngIf="!pokemons.length">Nenhum pokémon salvo como favorito!</div>
 </div>

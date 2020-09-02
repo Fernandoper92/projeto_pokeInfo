@@ -1,220 +1,235 @@
-#show-overlay {
-  display: none;
-}
-
-.overlay-container {
+.modal-container-main {
   position: fixed;
-  display: block;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
 }
 
-.main-container {
+.grid-box-main {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 70%;
-  height: 70%;
-  padding: 10px;
-  background-color: #ff4e4e;
-  color: white;
+  width: 550px;
+  height: 450px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  color: black;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   display: grid;
-  grid-template-columns: 70% 30%;
-  grid-template-rows: 70% 10% 20%;
-  grid-template-areas: 
-  " pokemon size"
-  "evolution size"
+  grid-template-columns: 65% 35%;
+  grid-template-rows: 7% 55% 33%;
 }
 
-.flex-item {
-  grid-column: 1 / 1;
+.hideModal {
+  display: none;
+  animation: hide 0.15s;
+  transform: scale(0);
+}
+
+@keyframes hide {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+}
+
+.showModal {
+  display: block;
+  animation: show 0.2s;
+  transform: scale(1);
+}
+
+@keyframes show {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.container-title {
+  font-size: 40px;
+  padding: 0 5px;
+  box-shadow: 0 0 2px black;
+  border-radius: 5px 5px 0 0;
+}
+
+.top-bar {
+  grid-column: 1 / span 2;
   grid-row: 1 / 1;
+  color: black;
   display: flex;
-  flex-direction: row;
+  padding: 5px;
+  justify-content: flex-end;
+  align-items: center;
+  box-shadow: 0 0 2px black;
+  background-color: #ff4e4e;
+  border-radius: 5px 5px 0 0;
+
+  .close {
+    font-size: 35px;
+    cursor: pointer;
+    position: absolute;
+    opacity: 0.3;
+  }
+
+  .close:hover {
+    opacity: 1;
+  }
 }
 
-.flex-item-data {
+.flex-container-item {
+  grid-column: 1 / 1;
+  grid-row: 2 / 2;
+  padding: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-}
+  justify-content: center;
 
-.flex-item-name {
-  font-size: 32px;
-}
+  .flex-box-item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    box-shadow: 0 0 2px black;
+    border-radius: 0 0 5px 5px;
 
-.flex-item-img {
-  width: 200px;
-  height: 200px;
-}
+    .container-img {
+      padding: 5px;
+      width: 180px;
+      height: 190px;
+    }
 
-.type-box {
-  display: inline-block;
-  text-align: center;
-  margin: 1px;
-  width: 70px;
-  color: white;
-  background-color: gray;
-  border-radius: 5px;
-  border: 0.2px solid black;
+    .flex-container {
+      height: 100%;
+      width: 100%;
+      padding: 5px;
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+
+      .container-name {
+        font-size: 28px;
+      }
+
+      .container-number {
+        font-size: 28px;
+      }
+
+      .container-types {
+        border-radius: 5px;
+        display: flex;
+
+        .word {
+          font-size: 20px;
+          margin: 0 1px 0 0;
+          display: flex;
+          align-items: center;
+        }
+
+        .box-type {
+          width: 60px;
+          margin: 0 1px;
+          padding: 2px;
+          text-align: center;
+          color: white;
+          border-radius: 5px;
+        }
+      }
+
+      .container-height {
+        font-size: 16px;
+      }
+
+      .container-weight {
+        font-size: 16px;
+      }
+    }
+  }
 }
 
 //configura o painel de evolução
-.flex-evo {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
 
-.flex-evo-title {
-  border-top:solid 0.5px black;
-  grid-column: 1 / 1;
-  grid-row: 2 / 2;
-  p {
-    font-size: 32px;
-    display: block;
+.flex-container-evos {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  grid-column: 1 / span 2;
+  grid-row: 3 / 3;
+  display: flex;
+  flex-direction: column;
+
+  .flex-box-evos {
+    height: 115px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 5px;
+    box-shadow: 0 0 2px black;
+    border-radius: 0 0 5px 5px;
+
+    .flex-container-evo {
+      display: flex;
+      flex-direction: row;
+
+      .flex-box-evo {
+        margin: 0 20px;
+        display: flex;
+        flex-direction: column;
+        // justify-items: center;
+        align-items: center;
+
+        .container-img {
+          width: 90px;
+          height: 90px;
+        }
+
+        .container-info {
+          display: flex;
+          flex-direction: row; 
+          justify-content: space-between;         
+        }
+      }
+
+      .container-arrow {
+        font-size: 60px;
+        align-self: center;
+        color: gray;
+      }
+    }
   }
 }
 
-.flex-evo-img {
-  width: 80px;
-  height: 80px;
-}
-
-.flex-evo-box {
-  display: flex;
-  flex-direction: column;
-  margin: 3px;
-}
-
-.flex-evo-item {
-  margin: 3px;
-  display: flex;
-  flex-direction: row;
-  font-size: 12px;
-}
-
-.type-container-evo {
-  display: flex;
-  flex-direction: row;
-}
-
-.type-box-evo {
-  text-align: center;
-  margin: 1px 0;
-  width: 50px;
-  color: white;
-  background-color: gray;
-  border-radius: 5px;
-  border: 0.2px solid black;
-}
-
-
 //configura o painel com informações extras
-.about {
-  margin-left: 10px;
-  padding-left: 5px;
-  border-left: solid 0.5px black;
+
+.flex-container-about {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
   grid-column: 2 / 2;
-  grid-row: 1 / span 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: justify;
-}
+  grid-row: 2 / 2;
+  border-radius: 5px;
 
-.about > div > h3 {
-  margin-bottom: 5px;
-  font-size: 32px;
-}
-
-#obs {
-  border: solid 1px black;
-  padding: 2px;
-}
-
-//configura as setas nas evoluções
-.arrow-right {
-  height: 0;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
-  border-left: 20px solid black;
-  position: relative;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto 0;
-  margin-left: 6px;
-}
-
-//configura o botão de fechar
-.close {
-  cursor: pointer;
-  position: absolute;
-  right: 8px;
-  top: 8px;
-  width: 32px;
-  height: 32px;
-  opacity: 0.3;
-}
-
-.close:hover {
-  opacity: 1;
-}
-
-.close:before,
-.close:after {
-  position: absolute;
-  left: 15px;
-  content: " ";
-  height: 33px;
-  width: 2px;
-  background-color: black;
-}
-
-.close:before {
-  transform: rotate(45deg);
-}
-
-.close:after {
-  transform: rotate(-45deg);
+  .container-description {
+    height: 191px;
+    padding: 5px;
+    box-shadow: 0 0 2px black;
+    border-radius: 0 0 5px 5px;
+  }
 }
 
 //apaga a ultima seta das evoluções
-.flex-evo > div:last-child > div:last-child {
+.flex-box-evos > div:last-child > span:last-child {
   display: none;
-  }
-
-// troca a cor do background dos types de acordo com o nome de cada type
-.grass {
-  background-color: green;
-}
-
-.poison {
-  background-color: purple;
-}
-
-.fire {
-  background-color: orangered;
-}
-
-.flying {
-  background: linear-gradient(180deg, #3dc7ef 50%, #bdb9b8 50%);
-}
-
-.water {
-  background-color: #4592c4;
-}
-
-.bug {
-  background-color: #729f3f;
 }

@@ -1,30 +1,26 @@
 <div class="main-container">
     <div class="filter">
-        <label class="text" for="input">Busca por nome:</label>
-        <input type="text" class="input text" name="input" [(ngModel)]="filtro" placeholder="Digite um nome">
-        <label style="margin-left: 20px" class="text" for="geracoes">Filtro por geração:</label>
-        <select class="select text" name="geracoes" [formControl]="geracao">
-            <option value="" selected>Todas as gerações</option>
-            <option *ngFor="let item of items" [value]="item.id">
-                <p *ngIf="item.geracao">{{ item.geracao }}</p>
-                <p *ngIf="item.regiao"> - {{ item.regiao }}</p>
+        <input type="text" class="input text" name="input" [formControl]="busca" placeholder="Digite um nome">
+        <select class="select text" name="geracoes" [formControl]="geracao" (change)="generationFilter(geracao.value)">
+            <option value="" disabled selected>Selecione uma geração...</option>
+            <option *ngFor="let geracao of geracoes" [value]="geracao.id">
+                <p *ngIf="geracao.geracao">{{ geracao.geracao }}</p>
+                <p *ngIf="geracao.regiao"> - {{ geracao.regiao }}</p>
             </option>
         </select>
     </div>
     <div class="grid-container">
-        <div class="grid-item" (mouseover)="mouseOver(pokemon.id)" (mouseout)="mouseOut()"
-            *ngFor="let pokemon of filterPokemon()">
-            <p class="grid-item-name">{{ pokemon.name }}</p>
+        <div class="grid-item" *ngFor="let pokemon of pokemons">
+            <p class="grid-item-name">{{ pokemon.name | camelCase }}</p>
             <img class="grid-item-img" src="https://pokeres.bastionbot.org/images/pokemon/{{ pokemon.id }}.png"
                 (click)="openCardDetailComponent(pokemon)">
             <div class="grid-item-container">
-                <p class="grid-item-number">Nº{{ pokemon.id }}</p>
-                <span id="fav{{ pokemon.name }}" class="favorite fas fa-star"
-                    [class.not-favorite]="!isFavorite(pokemon.name)" [class.is-favorite]="isFavorite(pokemon.name)"
-                    (click)="onFavoriteClick(pokemon)" (mouseover)="mouseOut()">
+                <p class="grid-item-number">{{ pokemon.id | number:'3.0' }}</p>
+                <span #starFavorite id="poke-{{ pokemon.id }}" class="favorite fas fa-star not-favorite"
+                    (click)="onFavoriteClick(pokemon.id, starFavorite)">
                 </span>
             </div>
-            <div class="types-container tooltip" id={{pokemon.id}}>
+            <!-- <div class="types-container tooltip" id={{pokemon.id}}>
                 <div class="flex-start type-container tooltip-item" *ngFor="let type of pokemon.types">
                     Tipo:
                     <div class="type-box {{ type.type.name }}">{{ type.type.name }}
@@ -36,10 +32,12 @@
                 <div class="flex-start type-weight">
                     Peso: {{ pokemon.weight }} kg
                 </div>
-            </div>
-
+            </div> -->
         </div>
     </div>
+    <button class="load-more" type="button" (click)="getPokemonsByNumber(startLoadPokemon, qtdPokemonLoad)"
+        [disabled]="startLoadPokemon === 386" [class.disabled]="startLoadPokemon === 386" *ngIf="!busca.value">Carregar
+        Mais</button>
     <app-card-detail #pokemonDetail></app-card-detail>
-    <div class="alert" *ngIf="!filterPokemon().length">Nenhum pokémon encontrado!</div>
+    <div class="alert" *ngIf="!pokemons">Nenhum pokémon encontrado!</div>
 </div>

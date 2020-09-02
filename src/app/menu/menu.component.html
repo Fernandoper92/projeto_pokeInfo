@@ -1,19 +1,20 @@
 <div id="main">
-    <nav  id="main-menu">
+    <nav id="main-menu">
+        <div class="flex-box">
+            <a id="title" routerLink="">Pokéinfo</a>
+        </div>
         <div id="flex-container">
-            <div class="flex-box">
-                <h1 id="title">PokeInfo</h1>
+            <div class="flex-box router" routerLinkActive="active">
+                <a routerLink="pokemons">Pokémons</a>
             </div>
-            <div class="flex-box">
-                <a routerLink="inicio">Pokémons</a>
+            <div class="flex-box router" routerLinkActive="active">
+                <a id="favoritos" routerLink="favoritos">Favoritos</a>
             </div>
-            <div class="flex-box">
-                <a id="favoritos" routerLink="inicio/favoritos">Favoritos</a>
-            </div>
-            <div class="flex-box">
-                <a id="sobre" routerLink="inicio/sobre">Sobre</a>
+            <div class="flex-box router" routerLinkActive="active">
+                <a id="sobre" routerLink="sobre">Sobre</a>
             </div>
         </div>
     </nav>
     <router-outlet></router-outlet>
 </div>
+<app-alert-box #alertBox></app-alert-box>

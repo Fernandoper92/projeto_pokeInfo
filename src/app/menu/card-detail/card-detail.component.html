@@ -1,51 +1,62 @@
-<div id="show-overlay">
-    <div class="overlay-container" id="overlay" (click)="closeCardDetailComponent($event)">
-        <div class="main-container" *ngIf="pokemon">
-            <a class="close" id="close-button" (click)="closeCardDetailComponent($event)"></a>
-            <section class="flex-item">
-                <img class="flex-item-img" src="https://pokeres.bastionbot.org/images/pokemon/{{ pokemon.id }}.png">
-                <div class="flex-item-data">
-                    <p class="flex-item-name">{{ pokemon.name }} | Nº{{ pokemon.id }}</p>
-                    <div class="type-container" *ngFor="let type of pokemon.types">
-                        Tipo:
-                        <div class="type-box {{ type.type.name }}">{{ type.type.name }}
+<div class="modal-container-main hideModal close-modal" id="show-modal" (click)="closeCardDetailComponent($event)">
+    <div class="grid-box-main modal" id="modal" *ngIf="pokemon">
+        <div class="top-bar">
+            <span class="close fas fa-times close-modal" id="close-button" (click)="closeCardDetailComponent($event)"></span>
+        </div>
+        <div class="flex-container-item">
+            <div class="container-title">
+                <p class="title">Pokémon</p>
+            </div>
+            <div class="flex-box-item">
+                <img class="container-img" src="https://pokeres.bastionbot.org/images/pokemon/{{ pokemon.id }}.png">
+                <div class="flex-container">
+                    <div class="container-name">
+                        <p class="name">{{ pokemon.name | camelCase }}</p>
+                    </div>
+                    <div class="container-number">
+                        <p class="number">{{ pokemon.id | number:'3.0' }}</p>
+                    </div>
+                    <div class="container-types">
+                        <p class="word">Tipo:</p>
+                        <div class="box-type" [style.backgroundColor]="colors[type.type.name]"
+                            *ngFor="let type of pokemon.types">
+                            <p>{{ type.type.name }}</p>
                         </div>
                     </div>
-                    <div class="type-height">
-                        Altura: {{ pokemon.height }} m
+                    <div class="container-height">
+                        <p class="height">Altura: {{ pokemon.height }} m</p>
                     </div>
-                    <div class="type-weight">
-                        Peso: {{ pokemon.weight }} kg
+                    <div class="container-weight">
+                        <p class="weight">Peso: {{ pokemon.weight }} kg</p>
                     </div>
                 </div>
-            </section>
-            <section class="flex-evo-title">
-                <p>Evoluções</p>
-            </section>
-            <section class="flex-evo">
-                <div class="flex-evo-item" *ngFor="let evolucao of evoChain">
-                    <img class="flex-evo-img" src="https://pokeres.bastionbot.org/images/pokemon/{{ evolucao.id }}.png">
-                    <div class="flex-evo-box">
-                        <p class="flex-evo-name">{{ evolucao.name }}</p>
-                        <p>Nº{{ evolucao.id }}</p>
-                        <div class="type-container-evo" *ngFor="let type of evolucao.types">
-                            <div class="type-box-evo {{ type.type.name }}">{{ type.type.name }}
-                            </div>
+            </div>
+        </div>
+        <div class="flex-container-evos">
+            <div class="container-title">
+                <p class="title">Evoluções</p>
+            </div>
+            <div class="flex-box-evos">
+                <div class="flex-container-evo" *ngFor="let evolution of evolutionChain">
+                    <div class="flex-box-evo">
+                        <img class="container-img"
+                            src="https://pokeres.bastionbot.org/images/pokemon/{{ evolution.id }}.png">
+                        <div class="container-info">
+                            <p class="name">{{ evolution.name | camelCase }}</p>
                         </div>
                     </div>
-                    <div class="arrow-right"></div>
+                    <span class="container-arrow fas fa-chevron-circle-right"></span>
                 </div>
-            </section>
-            <section class="about">
-                <div id="description">
-                    <h3>Descrição</h3>
-                    <p>{{ description }}</p>
-                </div>
-                <div id="obs">
-                    <h4>OBSSERVAÇÃO</h4>
-                    <p>Infelizmente só consegui a descrição em inglês.</p>
-                </div>
-            </section>
+            </div>
+        </div>
+        <div class="flex-container-about">
+            <div class="container-title">
+                <p class="title">Descrição</p>
+            </div>
+            <div class="container-description">
+                <p>{{ description }}</p><br>
+                <p>A Descrição é da propria API e por isso ela varia de idioma além de outros erros.</p>
+            </div>
         </div>
     </div>
 </div>
