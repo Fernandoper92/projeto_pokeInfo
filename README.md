@@ -8,9 +8,13 @@ O Pokéinfo é o meu primeiro projeto desenvolvido em Typescript com o framework
 
 No catálago você consegue ver através de cards todos os pokémons, podendo fazer uma busca por nome ou filtrar por geração. ao clicar no card é aberto uma janela onde mostra o restante das informações, também é possível salvar o pokémon como favorito, este que é salvo no localStorage do seu navegador, clicando no icone em formato de estrela. Atualmente é possível ver informações como: tipo, peso, altura, id, evoluções e descrição(o idioma varia por causa da API e contém bugs).
             
-## Framework
+## Ferramentas
 
-Esse projeto foi feito com [Angular](https://angular.io) version 9.1.0.
+### Framework:
+[Angular](https://angular.io) version 9.1.0.
+
+### RESTful API:
+[Pokeapi](https://pokeapi.co).
 
 ## Development server
 
