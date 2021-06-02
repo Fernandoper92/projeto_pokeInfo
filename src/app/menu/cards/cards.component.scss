@@ -1,5 +1,6 @@
 .main-container {
-  width: 65em;
+  width: 100%;
+  max-width: 65em;
   display: flex;
   flex-direction: column;
 
@@ -54,9 +55,14 @@ p {
 .filter {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: baseline;
   padding: 5px;
+
+  input, select {
+    margin: 5px;
+  }
 }
 
 .input {
@@ -70,10 +76,6 @@ p {
   height: auto;
   justify-content: center;
   padding: 10px;
-  // grid-auto-rows: 170px;
-  // align-content: space-around;
-  // box-sizing: border-box;
-  // overflow: visible;
 }
 
 .grid-item {
@@ -93,25 +95,9 @@ p {
     box-shadow: 0 0px 10px rgba(0,0,0,0.6);
     transform: scale(1.1, 1.1);
     
-    // .tooltip {
-      //   opacity: 0.9;
-      //   visibility: visible;
-      // }
     }
   }
 
-  // .tooltip {
-  //   width: auto;
-  //   height: auto;
-  //   padding: 2px 1px;
-  //   border: 1px solid;
-  //   border-radius: 5px;
-  //   position: fixed;
-  //   display: block;
-  //   opacity: 0;
-  //   visibility: hidden;
-  //   background: rgb(255, 251, 251);
-  // }
   
 .grid-item-name {
   font-size: 20px;
@@ -190,14 +176,3 @@ p {
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
-
-// troca a cor do background dos types de acordo com o nome de cada type
-// .type-box {
-//   width: 70px;
-//   display: inline-block;
-//   margin: 1px;
-//   margin-bottom: 1px;
-//   color: white;
-//   background-color: gray;
-//   border-radius: 5px;
-// }

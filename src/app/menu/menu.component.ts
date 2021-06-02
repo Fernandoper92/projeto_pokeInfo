@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertBoxComponent } from '../alert-box/alert-box.component';
 
 @Component({
   selector: 'app-menu',
@@ -9,13 +8,20 @@ import { AlertBoxComponent } from '../alert-box/alert-box.component';
 export class MenuComponent implements OnInit {
 
   aba: string = "";
-  @ViewChild('alertBox', { static: true }) alertBox: AlertBoxComponent;
 
   constructor() {
   }
 
   ngOnInit() {
-    this.alertBox.showAlertBox();
   }
+
+  myFunction() {
+    var x = document.getElementById("main-menu");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
   
 }

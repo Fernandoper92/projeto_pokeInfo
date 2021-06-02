@@ -20,19 +20,6 @@
                     (click)="onFavoriteClick(pokemon.id, starFavorite)">
                 </span>
             </div>
-            <!-- <div class="types-container tooltip" id={{pokemon.id}}>
-                <div class="flex-start type-container tooltip-item" *ngFor="let type of pokemon.types">
-                    Tipo:
-                    <div class="type-box {{ type.type.name }}">{{ type.type.name }}
-                    </div>
-                </div>
-                <div class="flex-start type-height">
-                    Altura: {{ pokemon.height }} m
-                </div>
-                <div class="flex-start type-weight">
-                    Peso: {{ pokemon.weight }} kg
-                </div>
-            </div> -->
         </div>
     </div>
     <button class="load-more" type="button" (click)="getPokemonsByNumber(startLoadPokemon, qtdPokemonLoad)"

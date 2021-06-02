@@ -12,7 +12,8 @@
 
 .flex-container-item {
     margin: 5px 10px;
-    width: 700px;
+    width: 100%;
+    max-width: 43.9em;
     text-align: center;
     display: flex;
     flex-direction: row;
@@ -75,4 +76,22 @@
     background-color: #FFD2D2;
     text-align: center;
     border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 500px) {
+
+    .flex-container-item {
+        .flex-container-info {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 360px) {
+
+    .flex-container-item {
+        .flex-container-types {
+            display: none;
+        }
+    }
 }

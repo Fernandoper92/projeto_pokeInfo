@@ -1,18 +1,24 @@
 #main {
     background-color: rgb(243, 243, 243);
-    width: 65em;
+    width: 100%;
+    max-width: 65em;
     margin: auto;
     padding-top: 65.2px;
 
     #main-menu {
         display: flex;
-        width: 65em;
+        width: 100%;
+        max-width: 65em;
         height: 65.2px;
         position: fixed;
         top: 0;
         box-shadow: 0 0 5px black;
         background-color: #ff4e4e;
         z-index: 1000;
+
+        .icon {
+            display: none;
+        }
     }
 }
 
@@ -30,7 +36,7 @@
     text-align: center;
 
     #title {
-        text-decoration: none;  
+        text-decoration: none;
         color: white;
         font-size: 48px;
         font-weight: bolder;
@@ -52,4 +58,50 @@
 
 .active {
     background-color: #ff2020b3;
+}
+
+@media screen and (max-width: 840px) {
+    #main {
+        #main-menu {
+            flex-direction: column;
+            justify-content: left;
+
+            #flex-container {
+                display: none;
+            }
+
+            .icon {
+                font-size: 2.5rem;
+                padding: 5px;
+                color: #fff;
+                display: block;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            &.responsive {
+                #flex-container {
+                    background-color: #ff4e4e;
+                    display: block;
+
+                    .flex-box {
+                        #title {
+                        }
+
+                        a {
+                        }
+
+                        &.router:hover {
+                            background-color: #ff4e4e;
+                        }
+                    }
+
+                    .active {
+                        background-color: #ff4e4e;
+                    }
+                }
+            }
+        }
+    }
 }

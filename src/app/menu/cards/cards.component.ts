@@ -107,20 +107,6 @@ export class CardsComponent implements OnInit {
     this.getPokemonsByNumber(geracao.arrStart, geracao.arrEnd, true);
   }
 
-  // mouseOver(id) {
-  //   let tooltip = document.getElementById(id);
-  //   window.onmousemove = function (e) {
-  //     let y = e.clientY;
-  //     let x = e.clientX;
-  //     tooltip.style.top = (y + 20) + 'px';
-  //     tooltip.style.left = (x + 20) + 'px';
-  //   }
-  // }
-
-  // mouseOut() {
-  //   window.onmousemove = null;
-  // }
-
   capitalizeFirstLetter(text: string) {
     return text.charAt(0).toUpperCase() + text.slice(1);
   }

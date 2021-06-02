@@ -10,7 +10,6 @@ import { MenuComponent } from './menu.component';
 import { CardDetailComponent } from './card-detail/card-detail.component';
 import { PokemonAPIService } from '../shared/pokemon-api.service';
 import { FavoritesComponent } from './favorites/favorites.component';
-import { AlertBoxComponent } from '../alert-box/alert-box.component';
 import { CamelCasePipe } from '../shared/camel-case.pipe';
 
 
@@ -22,7 +21,6 @@ import { CamelCasePipe } from '../shared/camel-case.pipe';
     CardsComponent,
     CardDetailComponent,
     FavoritesComponent,
-    AlertBoxComponent,
     CamelCasePipe
   ],
   imports: [
